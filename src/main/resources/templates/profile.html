@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Profile</title>
+    <link th:href="@{/css/styles.css}" rel="stylesheet" />
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet"/>
+    <script type="text/javascript" th:src="@{/js/App.js}"></script>
+
+</head>
+<body>
+    <div class="centerdiv">
+        <div class="firstdiv">
+            <div class="profile-picture" th:style="'background-image: url(\'' + ${avatar} + '\')'"></div>
+            <div class="profile-info">
+                <h1><span th:text="${username}"></span></h1>
+                <h2>Club: <span th:text="${club}"></span></h2>
+            </div>
+        </div>
+        <div class="separator"></div>
+        <div class="seconddiv">
+
+            <div class="nav-bar">
+                <button id="overview" onclick="showSection('section1')">Overview</button>
+                <button id="reputation" onclick="showSection('section2')">Reputation</button>
+                <button id="garage" onclick="showSection('section3')">Garage</button>
+                <!--<div class="underline" id="underline"></div>-->
+            </div>
+            <div class="sections">
+                <div id="section1" class="section">
+                    <h2>Section 1 Content</h2>
+                </div>
+
+                <div id="section2" class="section">
+                    <table id="RepTable">
+                        <thead>
+                        <tr>
+                            <th>Column 1</th>
+                            <th>Column 2</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div id="section3" class="section">
+                    <h2>Section 3 Content</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script type="text/javascript" th:src="@{/js/chart.js}"></script>
+</body>
+</html>

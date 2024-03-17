@@ -1,0 +1,117 @@
+.colorclass{
+    --text: #ffffff;
+    --background: #1c1c1c;
+    --primary: #ce2727;
+    --secondary: #555555;
+    --accent: #ff3d3d;
+    --bg2: #212121;
+}
+
+body{
+    background-color: #1c1c1c !important;
+    display: flex;
+    justify-content: center;
+    --align-items: center;
+}
+
+.centerdiv{
+    width: 80%;
+    height: auto;
+    margin-top: 100px;
+    background-color: #212121;
+    color: #ffffff;
+    --padding: 50px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: left;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.firstdiv{
+    width: 100%;
+    margin-top: auto;
+    background-color: #212121;
+    color: #ffffff;
+    padding: 50px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: left;
+    gap: 50px;
+    flex-wrap: wrap;
+}
+
+.separator {
+    height: 1px;
+    background-color: #ce2727;
+    width: 100%;
+    margin: 0 10px;
+}
+
+.seconddiv{
+    width: 100%;
+    margin-top: auto;
+    background-color: #212121;
+    color: #ffffff;
+    --padding: 50px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.profile-picture {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.profile-info{
+    margin-top: -10px;
+}
+
+.nav-bar {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    height: 40px;
+    background-color: #212121;
+    padding: 10px;
+}
+
+.nav-bar button {
+    border-radius: 50px;
+    background-color: #212121;
+    color: #fff;
+    padding: 10px 20px;
+    margin: 0 5px;
+    border: none;
+    cursor: pointer;
+}
+
+.sections {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+}
+
+.section {
+    display: none;
+    text-align: center;
+}
+
+.section h2 {
+    color: #333;
+}
+
+#clubsrepchart {
+    width: 600px;
+    margin: 35px auto;
+}
+
