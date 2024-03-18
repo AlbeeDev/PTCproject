@@ -7,6 +7,7 @@
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet"/>
     <script type="text/javascript" th:src="@{/js/App.js}"></script>
 
@@ -19,6 +20,14 @@
                 <h1><span th:text="${username}"></span></h1>
                 <h2>Club: <span th:text="${club}"></span></h2>
             </div>
+            <div class="profile-info" th:if="${manager}">
+                <h2>PlayerId:</h2>
+                <h2><span class="editable" contenteditable="true" th:text="${gameloftid}"></span><i class="fas fa-pencil-alt"></i></h2>
+            </div>
+            <div class="profile-info" th:unless="${manager}">
+                <h2>PlayerId:</h2>
+                <h2><span th:text="${gameloftid}"></span></h2>
+            </div>
         </div>
         <div class="separator"></div>
         <div class="seconddiv">
@@ -30,8 +39,28 @@
                 <!--<div class="underline" id="underline"></div>-->
             </div>
             <div class="sections">
-                <div id="section1" class="section">
-                    <h2>Section 1 Content</h2>
+                <div id="section1" class="section container">
+                    <div class="row w-50">
+                        <div class="col" th:if="${manager}">
+                            PlayerId: <br>
+                            <span class="editable" contenteditable="true">w-dghf3g</span>
+                        </div>
+                        <div class="col" th:unless="${manager}">
+                            PlayerId: <br>
+                            <span>w-dghf3g</span>
+                        </div>
+                    </div>
+                    <div class="row w-50">
+                        <div class="col">
+                            <div class="p-3 mb-2 bg-primary text-white">First div</div>
+                        </div>
+                        <div class="col">
+                            <div class="p-3 mb-2 bg-secondary text-white">Second div</div>
+                        </div>
+                        <div class="col">
+                            <div class="p-3 mb-2 bg-success text-white">Third div</div>
+                        </div>
+                    </div>
                 </div>
 
                 <div id="section2" class="section">

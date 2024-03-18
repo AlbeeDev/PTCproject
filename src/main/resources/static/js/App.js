@@ -1,6 +1,15 @@
 document.addEventListener('DOMContentLoaded', function () {
     //showSection('section1');
     //populateRep()
+    const editableDivs = document.querySelectorAll('.editable');
+    editableDivs.forEach(function(div) {
+        div.addEventListener('keydown', function(event) {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                event.target.blur();
+            }
+        });
+    });
 });
 function showSection(sectionId) {
     const sections = document.querySelectorAll('.section');
@@ -10,11 +19,17 @@ function showSection(sectionId) {
 
     const selectedSection = document.getElementById(sectionId);
     if (selectedSection) {
-        selectedSection.style.display = 'block';
+        selectedSection.style.display = 'flex';
+        selectedSection.style.flexWrap= 'wrap';
     }
 
-    const buttons = document.querySelectorAll('.nav-bar button');
+    const divwraps = document.querySelectorAll('.section div')
+    divwraps.forEach(div => {
+        div.style.flex='10'
+    })
+    //const buttons = document.querySelectorAll('.nav-bar button');
 }
+
 
 // ? WIP
 async function populateRep(){

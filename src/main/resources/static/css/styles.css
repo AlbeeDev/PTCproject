@@ -98,12 +98,12 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 80%;
     height: auto;
 }
 
 .section {
     display: none;
-    text-align: center;
 }
 
 .section h2 {
