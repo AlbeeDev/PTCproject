@@ -10,6 +10,8 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
     });
+
+
 });
 function showSection(sectionId) {
     const sections = document.querySelectorAll('.section');
@@ -28,6 +30,12 @@ function showSection(sectionId) {
         div.style.flex='10'
     })
     //const buttons = document.querySelectorAll('.nav-bar button');
+}
+
+function elementFromHtml(html){
+    const template = document.createElement("template");
+    template.innerHTML = html.trim();
+    return template.content.firstElementChild;
 }
 
 
