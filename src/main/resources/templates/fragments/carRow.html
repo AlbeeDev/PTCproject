@@ -1,0 +1,24 @@
+<th:block th:fragment="garageItem(garageItem)">
+  <div class="row bg-secondary mb-3">
+    <div class="col">
+      <div class="garage-item">
+        <p th:text="${garageItem.carClass}">Car Class</p>
+      </div>
+    </div>
+    <div class="col">
+      <div class="garage-item">
+        <p th:text="${garageItem.carName}">Car Name</p>
+      </div>
+    </div>
+    <div class="col">
+      <div class="garage-item">
+        <p th:text="${garageItem.rank}">Rank</p>
+      </div>
+    </div>
+    <div class="col">
+      <div class="garage-item">
+        <p th:text="${garageItem.rank == garageItem.goldRank ? 'Yes' : 'No'}">Is Gold Rank?</p>
+      </div>
+    </div>
+  </div>
+</th:block>

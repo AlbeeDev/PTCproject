@@ -1,4 +1,5 @@
 package com.albeedev.ptcproject.controller;
+import com.albeedev.ptcproject.dto.GarageItemDTO;
 import com.albeedev.ptcproject.entity.Player;
 import com.albeedev.ptcproject.service.DataService;
 import com.albeedev.ptcproject.service.DiscordService;
@@ -11,6 +12,7 @@ import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
@@ -49,7 +51,8 @@ public class AccessController {
             } else {
                 System.out.println("user found: " + pl.getUsername());
             }
-
+            List<GarageItemDTO> plGarage = dataService.getAllGarageItems(pl.getUsername());
+            model.addAttribute("carlist", plGarage);
 
             //?page
             model.addAttribute("username", userInfo.get("username"));

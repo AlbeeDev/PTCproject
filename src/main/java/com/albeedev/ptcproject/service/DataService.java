@@ -1,15 +1,15 @@
 package com.albeedev.ptcproject.service;
 
+import com.albeedev.ptcproject.dto.GarageItemDTO;
 import com.albeedev.ptcproject.entity.Club;
 import com.albeedev.ptcproject.entity.ClubRep;
 import com.albeedev.ptcproject.entity.Player;
 import com.albeedev.ptcproject.entity.PlayerRep;
-import com.albeedev.ptcproject.repository.ClubRepRepository;
-import com.albeedev.ptcproject.repository.ClubRepository;
-import com.albeedev.ptcproject.repository.PlayerRepRepository;
-import com.albeedev.ptcproject.repository.PlayerRepository;
+import com.albeedev.ptcproject.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 @Component
 public class DataService {
@@ -21,6 +21,12 @@ public class DataService {
     PlayerRepRepository playerRepRepository;
     @Autowired
     ClubRepRepository clubRepRepository;
+    @Autowired
+    GarageRepository garageRepository;
+
+    public List<GarageItemDTO> getAllGarageItems(String username) {
+        return garageRepository.getAllGarageItemsForPlayer(username);
+    }
 
     public Player getPlayerByDiscordId(String discordId){
         return playerRepository.getPlayerByDiscordId(discordId);

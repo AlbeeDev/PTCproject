@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
     //showSection('section1');
     //populateRep()
+
     const editableDivs = document.querySelectorAll('.editable');
     editableDivs.forEach(function(div) {
         div.addEventListener('keydown', function(event) {
@@ -16,13 +17,12 @@ document.addEventListener('DOMContentLoaded', function () {
 function showSection(sectionId) {
     const sections = document.querySelectorAll('.section');
     sections.forEach(section => {
-        section.style.display = 'none';
+        section.classList.add('d-none')
     });
 
     const selectedSection = document.getElementById(sectionId);
     if (selectedSection) {
-        selectedSection.style.display = 'flex';
-        selectedSection.style.flexWrap= 'wrap';
+        selectedSection.classList.remove('d-none');
     }
 
     const divwraps = document.querySelectorAll('.section div')
