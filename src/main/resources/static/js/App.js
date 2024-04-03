@@ -12,6 +12,39 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
+    var carNamesDiv = document.getElementById("carNames");
+    var carNamesData = carNamesDiv.textContent.trim();
+    var carNames = carNamesData.slice(1, -1).split(",");
+
+    // Remove any leading or trailing whitespace from each car name
+    carNames = carNames.map(function(name) {
+        return name.trim();
+    });
+
+    $('#carName').on('input', function() {
+        var inputVal = $(this).val().toLowerCase();
+        var filteredCars = carNames.filter(function(car) {
+            return car.toLowerCase().includes(inputVal);
+        });
+
+        // Clear previous results
+        $('#typeaheadResults').empty();
+
+        // Display up to 5 matching results below the input
+        for (var i = 0; i < Math.min(filteredCars.length, 5); i++) {
+            var resultListItem = $('<li>').addClass('list-group-item list-group-item-action user-select-none').text(filteredCars[i]);
+            resultListItem.appendTo('#typeaheadResults');
+
+            // Set click event to select input with the text of the clicked list item
+            resultListItem.click(function() {
+                $('#carName').val($(this).text());
+                $('#typeaheadResults').empty();
+            });
+        }
+
+    });
+
+
 
 });
 function showSection(sectionId) {

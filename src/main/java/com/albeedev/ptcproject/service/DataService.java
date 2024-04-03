@@ -23,9 +23,15 @@ public class DataService {
     ClubRepRepository clubRepRepository;
     @Autowired
     GarageRepository garageRepository;
+    @Autowired
+    CarRepository carRepository;
 
     public List<GarageItemDTO> getAllGarageItems(String username) {
         return garageRepository.getAllGarageItemsForPlayer(username);
+    }
+
+    public List<String> getAllCarNames(){
+        return carRepository.getAllCarNames();
     }
 
     public Player getPlayerByDiscordId(String discordId){

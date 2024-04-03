@@ -9,6 +9,13 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet"/>
+
+
+    <!-- Bootstrap JS and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.1/bootstrap3-typeahead.min.js"></script>
+
     <script type="text/javascript" th:src="@{/js/App.js}"></script>
     <script type="text/javascript" src="../static/js/App.js"></script>
 
@@ -98,10 +105,36 @@
                 </div>
 
                 <div id="section3" class="section d-none">
-                    <form class="row mb-3" id="carSearchForm">
+                    <div id="carNames" class="d-none" th:text="${carNames}"></div>
+                    <div class="row mb-3" id="carSearchForm">
                         <input class="col-8" type="search" placeholder="Search cars" aria-label="Search">
-                        <button class="btn btn-outline-danger col-1 p-3" type="submit">Search</button>
-                    </form>
+                        <button class="btn btn-outline-danger col-1 p-3 ms-3" type="submit">Search</button>
+                        <button id="togglePanelBtn" class="btn btn-outline-success col-1 ms-auto" data-bs-toggle="collapse" data-bs-target="#panel">Add Car</button>
+                    </div>
+                    <div id="panel" class="collapse row mb-3">
+                        <div class="card card-body bg-dark">
+                            <button class="btn-close" data-bs-toggle="collapse" data-bs-target="#panel" aria-label="Close"></button>
+                            <form>
+                                <form class="mb-3">
+                                    <label for="carName" class="form-label">Car Name</label>
+                                    <input type="text" class="form-control" id="carName" placeholder="Enter car name">
+                                    <ul id="typeaheadResults" class="list-group bg-light text-dark"></ul>
+                                    <label for="cars">Stars:</label>
+                                    <select name="cars" id="cars">
+                                        <option value="1">1 Star</option>
+                                        <option value="2">2 Star</option>
+                                        <option value="3">3 Star</option>
+                                        <option value="4">4 Star</option>
+                                        <option value="5">5 Star</option>
+                                        <option value="6">6 Star</option>
+                                    </select> <br>
+                                    <label for="carRank" class="form-label">Rank</label>
+                                    <input type="text" class="form-control" id="carRank" placeholder="Enter car rank">
+                                    <input type="submit" class="btn btn-success text-light" value="Add">
+                                </form>
+                            </form>
+                        </div>
+                    </div>
                     <div class="row bg-dark mb-3">
                         <div class="col">
                             <div class="garage-item">
@@ -123,13 +156,14 @@
                                 <p>Golden</p>
                             </div>
                         </div>
+                        <div class="col">
+                            <div class="garage-item">
+                                <p></p>
+                            </div>
+                        </div>
                     </div>
                     <div th:each="garageItem : ${carlist}">
                         <div th:replace="~{fragments/carRow :: garageItem(${garageItem})}"></div>
-                    </div>
-                    </div>
-                    <div id="loading" style="display: none;">
-                        <p>Loading more cars...</p>
                     </div>
                 </div>
             </div>

@@ -54,6 +54,8 @@ public class AccessController {
             List<GarageItemDTO> plGarage = dataService.getAllGarageItems(pl.getUsername());
             model.addAttribute("carlist", plGarage);
 
+            List<String> carnames = dataService.getAllCarNames();
+            model.addAttribute("carNames",carnames);
             //?page
             model.addAttribute("username", userInfo.get("username"));
             String clubrole = (String) userInfo.get("clubrole");
