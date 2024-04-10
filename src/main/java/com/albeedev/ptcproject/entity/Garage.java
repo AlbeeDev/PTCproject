@@ -16,7 +16,9 @@ public class Garage {
     @ManyToOne
     @JoinColumn(name = "car_id")
     private Car car;
-    private int rank;
+    private int stars;
+    @JoinColumn(name = "car_rank")
+    private int carRank;
     private Date date;
 
     public int getId() {
@@ -43,12 +45,20 @@ public class Garage {
         this.car = car;
     }
 
-    public int getRank() {
-        return rank;
+    public int getStars() {
+        return stars;
     }
 
-    public void setRank(int rank) {
-        this.rank = rank;
+    public void setStars(int stars) {
+        this.stars = stars;
+    }
+
+    public int getCarRank() {
+        return carRank;
+    }
+
+    public void setCarRank(int carRank) {
+        this.carRank = carRank;
     }
 
     public Date getDate() {

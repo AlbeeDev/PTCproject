@@ -68,3 +68,82 @@ var options = {
 
 var clubsrepchart = new ApexCharts(document.querySelector("#clubsrepchart"), options);
 clubsrepchart.render();
+
+const k = document.getElementById('playertotalcars').textContent.trim();
+const n = document.getElementById('totalcars').textContent.trim();
+const divisionValue = k / n;
+
+var optionsgcc = {
+    chart: {
+        type: 'radialBar',
+    },
+    series: [divisionValue * 100], // Convert the fraction to percentage for the chart
+    labels: ['Cars'], // Label for the chart
+    plotOptions: {
+        radialBar: {
+            hollow: {
+                margin: 15,
+                size: '70%',
+            },
+            dataLabels: {
+                name: {
+                    show: true,
+                    fontSize: '22px',
+                    fontWeight: '600',
+                },
+                value: {
+                    show: true,
+                    fontSize: '16px',
+                    fontWeight: '400',
+                    offsetY: 10,
+                    formatter: function(val) {
+                        return k + '/' + n + ' cars';
+                    }
+                }
+            }
+        }
+    }
+};
+
+var optionsgcc2 = {
+    chart: {
+        type: 'radialBar',
+        width: '300px', // Set the width
+        height: '300px', // Set the height
+    },
+    series: [divisionValue * 100], // Convert the fraction to percentage for the chart
+    labels: ['Cars'], // Label for the chart
+    plotOptions: {
+        radialBar: {
+            hollow: {
+                margin: 15,
+                size: '70%',
+            },
+            dataLabels: {
+                name: {
+                    show: true,
+                    fontSize: '22px',
+                    fontWeight: '600',
+                },
+                value: {
+                    show: true,
+                    fontSize: '16px',
+                    fontWeight: '400',
+                    offsetY: 10,
+                    formatter: function(val) {
+                        return k + '/' + n + ' cars';
+                    }
+                }
+            }
+        }
+    }
+};
+
+var chart = new ApexCharts(document.querySelector("#garagecount"), optionsgcc);
+chart.render();
+
+var chart = new ApexCharts(document.querySelector("#garagecount2"), optionsgcc2);
+chart.render();
+
+var chart = new ApexCharts(document.querySelector("#garagecount3"), optionsgcc2);
+chart.render();

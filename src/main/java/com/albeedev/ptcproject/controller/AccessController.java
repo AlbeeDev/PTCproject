@@ -3,14 +3,20 @@ import com.albeedev.ptcproject.dto.GarageItemDTO;
 import com.albeedev.ptcproject.entity.Player;
 import com.albeedev.ptcproject.service.DataService;
 import com.albeedev.ptcproject.service.DiscordService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.core.user.OAuth2User;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,7 +34,7 @@ public class AccessController {
     Map<String, Object> userInfo = new HashMap<>();
 
     @GetMapping("/access/profile")
-    public String showProfile(@AuthenticationPrincipal OAuth2User oauth2User, Model model, RedirectAttributes redirectAttributes) {
+    public String showProfile(@AuthenticationPrincipal OAuth2User oauth2User, Model model, RedirectAttributes redirectAttributes, HttpSession session) {
 
         try {
             if (userInfo.isEmpty()) {
@@ -38,6 +44,7 @@ public class AccessController {
             //?database
 
             String discordId = oauth2User.getAttribute("id");
+            session.setAttribute("discordid", discordId);
             System.out.println((String) discordId);
             Player pl = dataService.getPlayerByDiscordId(discordId);
             if (pl == null) {
@@ -51,11 +58,17 @@ public class AccessController {
             } else {
                 System.out.println("user found: " + pl.getUsername());
             }
-            List<GarageItemDTO> plGarage = dataService.getAllGarageItems(pl.getUsername());
+            List<GarageItemDTO> plGarage = dataService.getAllGarageItemsForPlayer(pl.getUsername());
             model.addAttribute("carlist", plGarage);
 
+            // ?adding the info for garage chart
+            int playertotalcars = dataService.getTotalPlayerCars(pl.getUsername());
+            int totalcars = dataService.getTotalCars();
+            model.addAttribute("playertotalcars", playertotalcars);
+            model.addAttribute("totalcars", totalcars);
+
             List<String> carnames = dataService.getAllCarNames();
-            model.addAttribute("carNames",carnames);
+            model.addAttribute("carNames", carnames);
             //?page
             model.addAttribute("username", userInfo.get("username"));
             String clubrole = (String) userInfo.get("clubrole");
@@ -71,8 +84,11 @@ public class AccessController {
         } catch (InterruptedException | ExecutionException ignored) {
         }
         model.addAttribute("userId", oauth2User.getAttribute("id"));
+        model.addAttribute("formData", new FormData());
         return "profile";
     }
+
+
 
     @GetMapping("/access/club")
     public String showClub(@AuthenticationPrincipal OAuth2User oauth2User, Model model, RedirectAttributes redirectAttributes) {
@@ -84,3 +100,4 @@ public class AccessController {
         return "clash";
     }
 }
+

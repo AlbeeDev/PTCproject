@@ -7,6 +7,7 @@ import com.albeedev.ptcproject.entity.Player;
 import com.albeedev.ptcproject.entity.PlayerRep;
 import com.albeedev.ptcproject.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -26,7 +27,23 @@ public class DataService {
     @Autowired
     CarRepository carRepository;
 
-    public List<GarageItemDTO> getAllGarageItems(String username) {
+    public int getIdFromCarName(String carname){
+        return carRepository.getIdFromCarName(carname);
+    }
+
+    public void setGarageItem(int playerid, int carid, int stars, int carrank){
+        garageRepository.setGarageItem(playerid,carid,stars,carrank);
+    }
+
+    public int getTotalPlayerCars(String username){
+        return garageRepository.getTotalPlayerCars(username);
+    }
+
+    public int getTotalCars(){
+        return carRepository.getTotalCars();
+    }
+
+    public List<GarageItemDTO> getAllGarageItemsForPlayer(String username) {
         return garageRepository.getAllGarageItemsForPlayer(username);
     }
 

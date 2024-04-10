@@ -65,10 +65,25 @@ function showSection(sectionId) {
     //const buttons = document.querySelectorAll('.nav-bar button');
 }
 
-function elementFromHtml(html){
-    const template = document.createElement("template");
-    template.innerHTML = html.trim();
-    return template.content.firstElementChild;
+function submitForm(url) {
+    var formData = {
+        viewedSection: document.getElementById('viewedSection').value,
+        carName: document.getElementById('carName').value,
+        stars: document.getElementById('stars').value,
+        carRank: document.getElementById('carRank').value
+    };
+
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', '/api/'+url);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.onload = function() {
+        if (xhr.status === 200) {
+            var response = JSON.parse(xhr.responseText);
+        } else {
+            // Handle error response
+        }
+    };
+    xhr.send(JSON.stringify(formData));
 }
 
 

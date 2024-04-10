@@ -17,6 +17,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.1/bootstrap3-typeahead.min.js"></script>
 
     <script type="text/javascript" th:src="@{/js/App.js}"></script>
+
     <script type="text/javascript" src="../static/js/App.js"></script>
 
 </head>
@@ -104,35 +105,52 @@
                     </table>
                 </div>
 
-                <div id="section3" class="section d-none">
+                <div id="section3" class="section container d-none">
                     <div id="carNames" class="d-none" th:text="${carNames}"></div>
+                    <div id="playertotalcars" class="d-none" th:text="${playertotalcars}"></div>
+                    <div id="totalcars" class="d-none" th:text="${totalcars}"></div>
+                    <div class="row mb-3">
+                        <div th:if="${goofy}" class="col">
+                            <div id="garagecount"></div>
+                        </div>
+                        <div class="col">
+                            <div class="row">
+                                <div class="col">
+                                    <div id="garagecount2"></div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <div id="garagecount3"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="row mb-3" id="carSearchForm">
                         <input class="col-8" type="search" placeholder="Search cars" aria-label="Search">
                         <button class="btn btn-outline-danger col-1 p-3 ms-3" type="submit">Search</button>
                         <button id="togglePanelBtn" class="btn btn-outline-success col-1 ms-auto" data-bs-toggle="collapse" data-bs-target="#panel">Add Car</button>
                     </div>
                     <div id="panel" class="collapse row mb-3">
-                        <div class="card card-body bg-dark">
+                        <div class="col bg-dark">
                             <button class="btn-close" data-bs-toggle="collapse" data-bs-target="#panel" aria-label="Close"></button>
-                            <form>
-                                <form class="mb-3">
-                                    <label for="carName" class="form-label">Car Name</label>
-                                    <input type="text" class="form-control" id="carName" placeholder="Enter car name">
-                                    <ul id="typeaheadResults" class="list-group bg-light text-dark"></ul>
-                                    <label for="cars">Stars:</label>
-                                    <select name="cars" id="cars">
-                                        <option value="1">1 Star</option>
-                                        <option value="2">2 Star</option>
-                                        <option value="3">3 Star</option>
-                                        <option value="4">4 Star</option>
-                                        <option value="5">5 Star</option>
-                                        <option value="6">6 Star</option>
-                                    </select> <br>
-                                    <label for="carRank" class="form-label">Rank</label>
-                                    <input type="text" class="form-control" id="carRank" placeholder="Enter car rank">
-                                    <input type="submit" class="btn btn-success text-light" value="Add">
-                                </form>
-                            </form>
+                            <div class="mb-3" id="carinsertform">
+                                <label for="carName" class="form-label">Car Name</label>
+                                <input type="text" class="form-control" id="carName" placeholder="Enter car name" autocomplete="off">
+                                <ul id="typeaheadResults" class="list-group bg-light text-dark"></ul>
+                                <label for="stars">Stars:</label>
+                                <select name="stars" id="stars">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                </select> <br>
+                                <label for="carRank" class="form-label">Rank</label>
+                                <input type="text" class="form-control" id="carRank" placeholder="Enter car rank" autocomplete="off">
+                                <input type="button" class="btn btn-success text-light" value="Add" onclick="submitForm('insertcar')">
+                            </div>
                         </div>
                     </div>
                     <div class="row bg-dark mb-3">
@@ -173,5 +191,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <script type="text/javascript" th:src="@{/js/chart.js}"></script>
+
 </body>
 </html>
