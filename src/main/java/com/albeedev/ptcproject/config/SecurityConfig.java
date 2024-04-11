@@ -27,7 +27,7 @@ public class SecurityConfig {
                     auth.anyRequest().permitAll();
                 })
                 .oauth2Login(auth->
-                        auth.defaultSuccessUrl("/access/profile", true));
+                        auth.defaultSuccessUrl("/access/init", true));
         return http.build();
     }
 

@@ -31,21 +31,18 @@ public class AccessController {
     @Autowired
     private DataService dataService;
 
-    Map<String, Object> userInfo = new HashMap<>();
-
-    @GetMapping("/access/profile")
-    public String showProfile(@AuthenticationPrincipal OAuth2User oauth2User, Model model, RedirectAttributes redirectAttributes, HttpSession session) {
-
+    @GetMapping("/access/init")
+    public String init(@AuthenticationPrincipal OAuth2User oauth2User, HttpSession session){
         try {
-            if (userInfo.isEmpty()) {
-                CompletableFuture<Map<String, Object>> userInfoFuture = discordService.getUserInfo(oauth2User.getAttribute("id"));
-                userInfo = userInfoFuture.get();
-            }
-            //?database
+            Map<String, Object> userInfo = new HashMap<>(); // Local userInfo map
+
+            CompletableFuture<Map<String, Object>> userInfoFuture = discordService.getUserInfo(oauth2User.getAttribute("id"));
+            userInfo = userInfoFuture.get();
 
             String discordId = oauth2User.getAttribute("id");
-            session.setAttribute("discordid", discordId);
-            System.out.println((String) discordId);
+            session.setAttribute("discordId", discordId);
+            session.setAttribute("userInfo",userInfo);
+
             Player pl = dataService.getPlayerByDiscordId(discordId);
             if (pl == null) {
                 pl = new Player();
@@ -58,33 +55,49 @@ public class AccessController {
             } else {
                 System.out.println("user found: " + pl.getUsername());
             }
-            List<GarageItemDTO> plGarage = dataService.getAllGarageItemsForPlayer(pl.getUsername());
-            model.addAttribute("carlist", plGarage);
 
-            // ?adding the info for garage chart
-            int playertotalcars = dataService.getTotalPlayerCars(pl.getUsername());
-            int totalcars = dataService.getTotalCars();
-            model.addAttribute("playertotalcars", playertotalcars);
-            model.addAttribute("totalcars", totalcars);
 
-            List<String> carnames = dataService.getAllCarNames();
-            model.addAttribute("carNames", carnames);
-            //?page
-            model.addAttribute("username", userInfo.get("username"));
-            String clubrole = (String) userInfo.get("clubrole");
-            if (clubrole.equals("error")) {
-                redirectAttributes.addFlashAttribute("error", "Your account doesnt have a valid club role");
-                return "redirect:/home";
-            }
-            System.out.println(pl.getGameloftId());
-            model.addAttribute("gameloftid", pl.getGameloftId());
-            model.addAttribute("club", clubrole);
-            model.addAttribute("manager", userInfo.get("manager"));
-            model.addAttribute("avatar", userInfo.get("avatar"));
         } catch (InterruptedException | ExecutionException ignored) {
         }
-        model.addAttribute("userId", oauth2User.getAttribute("id"));
-        model.addAttribute("formData", new FormData());
+
+        return "redirect:/access/profile";
+    }
+
+    @SuppressWarnings("unchecked")
+    @GetMapping("/access/profile")
+    public String showProfile(Model model, RedirectAttributes redirectAttributes, HttpSession session) {
+
+        String discordId = (String) session.getAttribute("discordId");
+        Map<String, Object> userInfo = (Map<String, Object>) session.getAttribute("userInfo");
+
+        Player pl = dataService.getPlayerByDiscordId(discordId);
+
+        List<GarageItemDTO> plGarage = dataService.getAllGarageItemsForPlayer(pl.getUsername());
+        model.addAttribute("carlist", plGarage);
+
+        // ?adding the info for garage chart
+        int playertotalcars = dataService.getTotalPlayerCars(pl.getUsername());
+        int totalcars = dataService.getTotalCars();
+        model.addAttribute("playertotalcars", playertotalcars);
+        model.addAttribute("totalcars", totalcars);
+
+        List<String> carnames = dataService.getAllCarNames();
+        model.addAttribute("carNames", carnames);
+        //?page
+        model.addAttribute("username", userInfo.get("username"));
+        String clubrole = (String) userInfo.get("clubrole");
+        if (clubrole.equals("error")) {
+            redirectAttributes.addFlashAttribute("error", "Your account doesnt have a valid club role");
+            return "redirect:/home";
+        }
+        System.out.println(pl.getGameloftId());
+        model.addAttribute("gameloftid", pl.getGameloftId());
+        model.addAttribute("club", clubrole);
+        model.addAttribute("manager", userInfo.get("manager"));
+        model.addAttribute("avatar", userInfo.get("avatar"));
+
+        model.addAttribute("userId", discordId);
+        model.addAttribute("lastsection", session.getAttribute("lastsection"));
         return "profile";
     }
 

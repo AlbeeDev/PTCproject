@@ -1,4 +1,4 @@
-package com.albeedev.ptcproject.controller;
+package com.albeedev.ptcproject.custom;
 
 public class FormData {
     private String carName;

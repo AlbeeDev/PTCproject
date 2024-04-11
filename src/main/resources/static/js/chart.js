@@ -77,8 +77,8 @@ var optionsgcc = {
     chart: {
         type: 'radialBar',
     },
-    series: [divisionValue * 100], // Convert the fraction to percentage for the chart
-    labels: ['Cars'], // Label for the chart
+    series: [divisionValue * 100],
+    labels: ['Cars'],
     plotOptions: {
         radialBar: {
             hollow: {
@@ -98,21 +98,23 @@ var optionsgcc = {
                     offsetY: 10,
                     formatter: function(val) {
                         return k + '/' + n + ' cars';
-                    }
+                    },
+                    color: "#FFFFFF"
                 }
             }
         }
-    }
+    },
+    colors: ['#FF0000']
 };
 
 var optionsgcc2 = {
     chart: {
         type: 'radialBar',
-        width: '300px', // Set the width
-        height: '300px', // Set the height
+        width: '300px',
+        height: '300px',
     },
-    series: [divisionValue * 100], // Convert the fraction to percentage for the chart
-    labels: ['Cars'], // Label for the chart
+    series: [divisionValue * 100],
+    labels: ['Cars'],
     plotOptions: {
         radialBar: {
             hollow: {

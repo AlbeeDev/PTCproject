@@ -15,7 +15,15 @@ public interface GarageRepository extends JpaRepository<Garage, Long> {
             "FROM Garage g " +
             "JOIN g.player p " +
             "JOIN g.car cL " +
-            "WHERE p.username = :username")
+            "WHERE p.username = :username " +
+            "ORDER BY" +
+            "    CASE" +
+            "        WHEN  cL.carClass= 'd' THEN 1" +
+            "        WHEN cL.carClass = 'c' THEN 2" +
+            "        WHEN cL.carClass = 'b' THEN 3" +
+            "        WHEN cL.carClass = 'a' THEN 4" +
+            "        WHEN cL.carClass = 's' THEN 5" +
+            "    END, cL.id")
     List<GarageItemDTO> getAllGarageItemsForPlayer(@Param("username") String username);
 
     @Query(value = "select count(*) from garage join player p on p.id = garage.player_id where p.username= :username",nativeQuery = true)

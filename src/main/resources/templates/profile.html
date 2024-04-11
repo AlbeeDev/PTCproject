@@ -61,7 +61,7 @@
         </div>
         <div class="separator"></div>
         <div class="seconddiv">
-
+            <div id="lastsection" th:text="${lastsection}" style="display: none;"></div>
             <div class="nav-bar">
                 <button id="overview" class="btn-light shadow-none" onclick="showSection('section1')">Overview</button>
                 <button id="reputation" class="btn-light shadow-none" onclick="showSection('section2')">Reputation</button>
@@ -110,7 +110,7 @@
                     <div id="playertotalcars" class="d-none" th:text="${playertotalcars}"></div>
                     <div id="totalcars" class="d-none" th:text="${totalcars}"></div>
                     <div class="row mb-3">
-                        <div th:if="${goofy}" class="col">
+                        <div class="col">
                             <div id="garagecount"></div>
                         </div>
                         <div class="col">
@@ -149,7 +149,7 @@
                                 </select> <br>
                                 <label for="carRank" class="form-label">Rank</label>
                                 <input type="text" class="form-control" id="carRank" placeholder="Enter car rank" autocomplete="off">
-                                <input type="button" class="btn btn-success text-light" value="Add" onclick="submitForm('insertcar')">
+                                <input type="button" class="btn btn-success text-light" value="Add" onclick="submitForm('insertcar',setcardata())">
                             </div>
                         </div>
                     </div>
